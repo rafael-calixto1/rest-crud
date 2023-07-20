@@ -1,3 +1,4 @@
+/*
 package com.dsenvolvendosistemas.demo.rest;
 
 import com.dsenvolvendosistemas.demo.entity.Student;
@@ -32,3 +33,4 @@ public class DemoRestController {
         return theStudents.get(studentId);
     }
 }
+*/

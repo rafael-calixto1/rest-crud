@@ -14,40 +14,34 @@ import java.util.List;
 @RequestMapping("/api")
 public class StudentRestController {
     private List<Student> theStudents;
+
     @PostConstruct
-    public void localData(){
+    public void localData() {
         theStudents = new ArrayList<>();
 
         theStudents.add(new Student("Rafael", "Calixto"));
         theStudents.add(new Student("Cristiano", "Jr"));
         theStudents.add(new Student("Lionel", "Ronaldo"));
     }
+
     @GetMapping("students")
-    public List<Student> getStudent(){
+    public List<Student> getStudent() {
 
         return theStudents;
     }
+
     @GetMapping("/students/{studentId}")
-    public Student getStudent(@PathVariable int studentId){
+    public Student getStudent(@PathVariable int studentId) {
         //exception
-        if( (studentId >= theStudents.size()) || (studentId < 0)){
+        if ((studentId >= theStudents.size()) || (studentId < 0)) {
             throw new StudentNotFoundException("Student not found - " + studentId);
         }
         return theStudents.get(studentId);
     }
-    @ExceptionHandler
-    public ResponseEntity<StudentErrorResponse> handleException(StudentNotFoundException exc){
-        //create a StudentErrorResponse
-        StudentErrorResponse error = new StudentErrorResponse();
 
-        error.setStatus(HttpStatus.NOT_FOUND.value());
-        error.setMessage(exc.getMessage());
-        error.setTimeStamp(System.currentTimeMillis());
 
-        //return ResponseEntity
-        return  new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
-    }
 }
+
 
 
 
